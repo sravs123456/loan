@@ -1,10 +1,10 @@
 package com.neoteric.fullstackdemo_310824.service;
 
-import com.neoteric.fullstackdemo_310824.exception.AccountCreationFailed;
+import com.neoteric.fullstackdemo_310824.exception.AccountCreationFailedException;
 import com.neoteric.fullstackdemo_310824.model.Account;
 import com.neoteric.fullstackdemo_310824.model.AccountAddressEntity;
 import com.neoteric.fullstackdemo_310824.model.AccountEntity;
-import com.neoteric.fullstackdemo_310824.model.HibernateUtils;
+import hibernate.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -98,6 +98,10 @@ public class AccountService {
             }
         } catch (SQLException e) {
             System.out.println("Exception occured in sql exception" + e);
+        }
+        catch (AccountCreationFailedException e){
+            System.out.println("Exception"+e);
+            throw e;
         }
         return accountNumber;
     }
